@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="../static/add_question.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Quiz Question - DSAMaster</title>
+
+    <style>
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">DSAMaster</div>
+        <div class="nav-links">Learn • Practice • Improve</div>
+    </header>
+
+    <div class="wrapper">
+        <div class="card">
+            <h1>Add Quiz Question</h1>
+
+            <form action="{{ url_for('add_question') }}" method="POST">
+                
+                <div class="form-group">
+                    <label for="subject">Select Subject</label>
+                    <select id="subject" name="subject" required>
+                        <option value="">Choose Subject</option>
+                        <option value="dsa">DSA</option>
+                        <option value="bee">BEE</option>
+                        <option value="bel">BEL</option>
+                        <option value="cald">CALD</option>
+                        <option value="sda">SDA</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="question">Question</label>
+                    <textarea id="question" name="question" placeholder="Enter question description..." required></textarea>
+                </div>
+
+                <div class="options-grid">
+                    <div class="form-group">
+                        <label for="option1">Option 1</label>
+                        <input type="text" id="option1" name="option1" placeholder="Option 1" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="option2">Option 2</label>
+                        <input type="text" id="option2" name="option2" placeholder="Option 2" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="option3">Option 3</label>
+                        <input type="text" id="option3" name="option3" placeholder="Option 3" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="option4">Option 4</label>
+                        <input type="text" id="option4" name="option4" placeholder="Option 4" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="answer">Correct Answer</label>
+                    <select id="answer" name="answer" required>
+                        <option value="">Select Correct Option</option>
+                        <option value="option1">Option 1</option>
+                        <option value="option2">Option 2</option>
+                        <option value="option3">Option 3</option>
+                        <option value="option4">Option 4</option>
+                    </select>
+                </div>
+
+                <div class="buttons">
+                    <button type="submit" class="btn-save">Save Question</button>
+                    <button type="reset" class="btn-reset">Clear</button>
+                </div>
+
+            </form>
+
+            <div class="manage">
+                <h2>Manage Questions</h2>
+                <p>Edit or delete questions that have already been added.</p>
+                <a href="" class="btn-manage">View Questions</a>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

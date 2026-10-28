@@ -1,0 +1,38 @@
+{
+    "bee": [
+        {
+            "question": "sdfsd",
+            "options": [
+                "ts",
+                "e",
+                "w",
+                "t"
+            ],
+            "answer": "ts"
+        }
+    ],
+    "dsa": [
+        {
+            "question": "what is the best time complexity of quick sort algorithm?",
+            "options": [
+                "n",
+                "n^2",
+                "nlogn",
+                "logn"
+            ],
+            "answer": "nlogn"
+        }
+    ],
+    "sda": [
+        {
+            "question": "Which diagram is used to show lifetime of a function",
+            "options": [
+                "sequence",
+                "class",
+                "activity",
+                "usecase"
+            ],
+            "answer": "sequence"
+        }
+    ]
+}

@@ -1,7 +1,8 @@
 
 from flask import Flask, render_template, request, redirect, url_for, session
 from dsa_structures import Array, Stack, Queue, LinkedList
-
+import json
+import os
 
 app = Flask(__name__)
 app.secret_key = "dsa-quiz-secret-key"
@@ -204,6 +205,21 @@ def prepare_questions(subject):
     for question in subjects[subject]["questions"]:
         question_queue.enqueue(question)
 
+        # 2. Load user-added questions
+
+    if os.path.exists("question.json"):
+
+        with open("question.json","r") as file:
+
+            user_questions = json.load(file)
+
+
+        if subject in user_questions:
+
+            for question in user_questions[subject]:
+
+                question_queue.enqueue(question)
+
     # LINKED LIST: Connect questions as circular nodes.
     question_list = LinkedList()
 
@@ -322,6 +338,67 @@ def result(subject):
         total=len(subjects[subject]["questions"]),
         subject_name=subjects[subject]["name"]
     )
+
+@app.route("/add_question", methods=["GET", "POST"])
+def add_question():
+
+    if request.method == "POST":
+
+        filename = "question.json"
+
+        subject = request.form["subject"]
+        question = request.form["question"]
+
+        option1 = request.form["option1"]
+        option2 = request.form["option2"]
+        option3 = request.form["option3"]
+        option4 = request.form["option4"]
+
+        options = [option1, option2, option3, option4]
+
+        selected = request.form["answer"]
+
+        # Store the actual answer text
+        answer = {
+            "option1": option1,
+            "option2": option2,
+            "option3": option3,
+            "option4": option4
+        }[selected]
+
+        new_question = {
+            "question": question,
+            "options": options,
+            "answer": answer
+        }
+
+        # Load existing data
+        if os.path.exists(filename):
+            with open(filename, "r") as file:
+                try:
+                    data = json.load(file)
+                except json.JSONDecodeError:
+                    data = {}
+        else:
+            data = {}
+
+        # Initialize subjects if they don't exist
+        if subject not in data:
+            data[subject] = []
+
+        # Add question
+        data[subject].append(new_question)
+
+        # Save JSON
+        with open(filename, "w") as file:
+            json.dump(data, file, indent=4)
+
+        print("Question Saved Successfully!")
+
+        return redirect(url_for("home"))
+
+    # GET request
+    return render_template("add_question.html")
 
 
 if __name__ == "__main__":
